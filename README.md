@@ -3,14 +3,14 @@ My initial thoughts on the project
 I might do further security audits of their dependencies and add them here in the future.
 
 ## Initial Criticism:
-Uses `AES` in `Cipher Block Chaining` mode, making it potentially possible for us to recover the plaintext as a local attacker.
+Uses `AES` in `Cipher Block Chaining` mode, making it potentially possible for us to recover the plaintext as a `local network` attacker.
 Note that `global` adversaries like certain 3 letter agencies might not be able to pull this off for 100% of the users traffic,
 thus the VPN does protect you somewhat from global adversaries.
 
 ## Recommendation:
 Use a wrapper that supports AES in CTR or GCM mode or configures it to use `chacha20-poly1305` for a stream cipher instead.
 AVOID using this one.
-Do not expect a fix to be added here, since I'm satisfied with using my [own modified configurator service](https://github.com/justhx0r/riseup-vpn-configurator.git).
+Do not expect a fix to be added here, since I'm satisfied with using my [own modified configurator service](https://github.com/justhx0r/riseup-vpn-configurator.git) as forked from 
 Note that `most` of `riseup.net`s servers DO support `AES-256-GCM`, which is one of the recommended ciphers.
 
 ### Install 
