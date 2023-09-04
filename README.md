@@ -1,6 +1,8 @@
 # Fork of https://0xacab.org/leap/bitmask-vpn.git.
+My initial thoughts on the project
+I might do further security audits of their dependencies and add them here in the future.
 
-## Criticism:
+## Initial Criticism:
 Uses `AES` in `Cipher Block Chaining` mode, making it potentially possible for us to recover the plaintext as a local attacker.
 Note that `global` adversaries like certain 3 letter agencies might not be able to pull this off for 100% of the users traffic,
 thus the VPN does protect you somewhat from global adversaries.
@@ -11,8 +13,8 @@ AVOID using this one.
 Do not expect a fix to be added here, since I'm satisfied with using my [own modified configurator service](https://github.com/justhx0r/riseup-vpn-configurator.git).
 Note that `most` of `riseup.net`s servers DO support `AES-256-GCM`, which is one of the recommended ciphers.
 
-###Install 
-# snap
+### Install 
+#### snap
 
 ```
 sudo snap install riseup-vpn --classic
@@ -29,7 +31,7 @@ src="https://snapcraft.io/riseup-vpn/embedded?button=white&channels=true"
 frameborder="0" width="100%" height="380px" style="border: 1px solid #CCC;
 border-radius: 2px;"></iframe>
 
-# arch
+#### arch
 
 [There's a package in AUR](https://aur.archlinux.org/packages/riseup-vpn-git) that tracks main branch, so expect some instabilities (early birds catch the bugs they say, and we're thankful for that)
 
@@ -37,7 +39,7 @@ border-radius: 2px;"></iframe>
 yaourt -Sy riseup-vpn-git
 ```
 
-# gentoo
+#### gentoo
 
 An ebuild is available in Gentoo's [main repository](https://packages.gentoo.org/packages/net-vpn/riseup-vpn).
 
@@ -45,7 +47,7 @@ An ebuild is available in Gentoo's [main repository](https://packages.gentoo.org
 emerge riseup-vpn
 ```
 
-# deb
+#### deb
 
 We haven't updated deb.leap.se repo yet 😞 (see #466), but if you *really* desire a debian
 package you can build your own for the time being:
@@ -57,7 +59,7 @@ sudo dpkg -i ../riseup-vpn*.deb
 
 If you're using ubuntu, you can use [kali's ppa](https://launchpad.net/~kalikaneko/+archive/ubuntu/ppa).
 
-## Build
+##### Build
 
 Clone this repo, install dependencies and build the application. Dependencies
 assume debian packages, or homebrew for osx. For Windows OS see corresponding section below. For other systems try
@@ -75,7 +77,7 @@ If you have Ubuntu Bionic/18.04, the package in the repositories is too old. To 
 
 For other situations, have a look at https://github.com/golang/go/wiki#working-with-go
 
-## Test
+##### Test
 
 You can run some tests too.
 
@@ -85,10 +87,10 @@ You can run some tests too.
   make test_ui
 ```
 
-## Windows
+##### Windows
 As for now app can be build on Win OS using `Cygwin` terminal.
 
-#### Precondition
+###### Precondition
 You need to have installed and added to your user PATH (mentioned version tested in Win10):
 1) Go (>= go1.15.4)
 2) QT (>= Qt5.12.9)
@@ -98,12 +100,12 @@ You need to have installed and added to your user PATH (mentioned version tested
 
 **Note:** for \#5 you don't need to add packages to PATH they will available in `cygwin` after installation.
 
-#### Get Source
+###### Get Source
 ```
     git clone git@0xacab.org:leap/bitmask-vpn.git && cd bitmask-vpn
 ```
 
-#### Build
+###### Build
 Build script uses a symbolic link in one of the stages. Unfortunately Cygwin can't create native symlink from local non   
 admin user due to windows security restriction. To avoid this issue we need to call next target from cygwin terminal as   
 Administrator. This need to be done only once. 
@@ -117,7 +119,7 @@ After `relink_vendor` use this to build the app:
 ```
 After successful build application will be available at: `build/qt/release/riseup-vpn.exe`
 
-#### Test
+###### Test
 
 To run tests:
 
